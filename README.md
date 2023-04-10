@@ -2,11 +2,11 @@
 
 ### My codewars profile:
 ---
-https://www.codewars.com/users/docent_204
+- https://www.codewars.com/users/docent_204
 
 ### My email:
 ---
-chemestru@gmail.com
+- chemestru@gmail.com
 <!--
 **Leonid-Sarmatov/Leonid-Sarmatov** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
