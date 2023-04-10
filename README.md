@@ -1,6 +1,6 @@
 ### Hi there 👋
 
-### My codewars profile:
+### :muscle: My codewars profile:
 ---
 - https://www.codewars.com/users/docent_204
 
