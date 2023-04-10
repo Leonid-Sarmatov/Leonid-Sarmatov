@@ -1,5 +1,3 @@
-### Hi there 👋
-
 ### :muscle: My codewars profile:
 ---
 - https://www.codewars.com/users/docent_204
