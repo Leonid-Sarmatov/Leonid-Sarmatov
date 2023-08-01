@@ -1,5 +1,5 @@
 ## :muscle: My codewars profile: :muscle:
-![Kyu](https://www.codewars.com/users/docent_204)
+![Kyu](https://www.codewars.com/users/docent_204/badges/large?logo=false)
 
 
 ## :hammer_and_wrench: Languages and tools: :hammer_and_wrench:
