@@ -1,8 +1,10 @@
-## :muscle: My codewars profile: :muscle:
+## My codewars profile:
 ![Kyu](https://www.codewars.com/users/docent_204/badges/large?logo=false)
 
+## Statistics:
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=anuraghazra&layout=donut)](https://github.com/anuraghazra/github-readme-stats)
 
-## :hammer_and_wrench: Languages and tools: :hammer_and_wrench:
+## Languages and tools:
 <div>
   <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original-wordmark.svg" title="Java" alt="Java" width="40" height="40"/>&nbsp;
   <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/python/python-original-wordmark.svg" title="Java" alt="Java" width="40" height="40"/>&nbsp;
@@ -13,7 +15,7 @@
 </div>
 
 
-## :pencil: My contacts: :pencil:
+## My contacts:
 - Email: chemestru@gmail.com
 - VK: https://vk.com/docent_204
 <!--
