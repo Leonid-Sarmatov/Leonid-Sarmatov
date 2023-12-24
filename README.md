@@ -37,6 +37,7 @@
 ## My contacts:
 - Email: chemestru@gmail.com
 - VK: https://vk.com/docent_204
+- Codewars: https://www.codewars.com/users/docent_204
 <!--
 **Leonid-Sarmatov/Leonid-Sarmatov** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
