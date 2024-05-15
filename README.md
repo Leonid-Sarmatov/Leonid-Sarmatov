@@ -1,6 +1,5 @@
 ## My codewars profile:
 ![Kyu](https://www.codewars.com/users/docent_204/badges/large?logo=false)
-- [See profile](https://www.codewars.com/users/docent_204)
 
 ## Statistics:
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Leonid-Sarmatov&layout=donut&langs_count=8)](https://github.com/anuraghazra/github-readme-stats)
@@ -37,10 +36,10 @@
 
 ## My contacts:
 - Email: ```chemestru@gmail.com```
-- [Codewars profile](https://www.codewars.com/users/docent_204)
 
-## Sertificates:
+## Achievements:
 - In May 2024, I completed a course on Golang development from Yandex. [See...](https://github.com/Leonid-Sarmatov/my-images/blob/master/729544474.pdf)
+- [Codewars profile](https://www.codewars.com/users/docent_204)
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Leonid-Sarmatov&label=Profile%20views&color=0e75b6&style=flat" alt="Leonid-Sarmatov" /> </p>
 <!--
