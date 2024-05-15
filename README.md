@@ -1,5 +1,6 @@
 ## My codewars profile:
 ![Kyu](https://www.codewars.com/users/docent_204/badges/large?logo=false)
+- [See profile](https://www.codewars.com/users/docent_204)
 
 ## Statistics:
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Leonid-Sarmatov&layout=donut&langs_count=8)](https://github.com/anuraghazra/github-readme-stats)
