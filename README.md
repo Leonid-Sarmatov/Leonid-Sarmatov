@@ -39,6 +39,9 @@
 - VK: https://vk.com/docent_204
 - Codewars: https://www.codewars.com/users/docent_204
 
+## Sertificates:
+- In May 2024, I completed a course on Golang development from Yandex: https://github.com/Leonid-Sarmatov/my-images/blob/master/729544474.pdf
+
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=Leonid-Sarmatov&label=Profile%20views&color=0e75b6&style=flat" alt="Leonid-Sarmatov" /> </p>
 <!--
 **Leonid-Sarmatov/Leonid-Sarmatov** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
