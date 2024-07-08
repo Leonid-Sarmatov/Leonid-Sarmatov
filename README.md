@@ -54,3 +54,152 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+
+
+MyProject/
+├── FreeRTOS/
+│   ├── Source/
+│   │   ├── include/
+│   │   ├── portable/
+│   │   │   ├── GCC/
+│   │   │   │   └── ARM_CM3/
+│   │   │   └── MemMang/
+│   │   │       ├── heap_1.c
+│   │   │       ├── heap_2.c
+│   │   │       ├── heap_3.c
+│   │   │       ├── heap_4.c
+│   │   │       └── heap_5.c
+│   │   ├── croutine.c
+│   │   ├── list.c
+│   │   ├── queue.c
+│   │   ├── tasks.c
+│   │   ├── timers.c
+│   │   └── ...
+│   ├── CMSIS_RTOS/
+│   │   ├── include/
+│   │   ├── os.h
+│   │   ├── os.c
+│   │   └── ...
+├── Inc/
+│   ├── stm32f1xx_hal_conf.h
+│   ├── stm32f1xx_it.h
+│   ├── main.h
+│   ├── FreeRTOSConfig.h
+│   └── ...
+├── Src/
+│   ├── main.c
+│   ├── stm32f1xx_hal_msp.c
+│   ├── stm32f1xx_it.c
+│   ├── startup_stm32f103xx.s
+│   ├── system_stm32f1xx.c
+│   └── ...
+├── Makefile
+└── README.md
+
+
+
+
+
+#include "main.h"
+#include "cmsis_os.h"
+
+// Определение светодиода (предполагаем, что он подключен к порту GPIOA, пину 5)
+#define LED_PIN GPIO_PIN_5
+#define LED_GPIO_PORT GPIOA
+
+void SystemClock_Config(void);
+void MX_GPIO_Init(void);
+void StartDefaultTask(void *argument);
+
+int main(void)
+{
+  HAL_Init();
+  SystemClock_Config();
+  MX_GPIO_Init();
+
+  osKernelInitialize();
+
+  // Создание задачи мигания светодиодом
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
+  osThreadCreate(osThread(defaultTask), NULL);
+
+  osKernelStart();
+
+  while (1)
+  {
+  }
+}
+
+void StartDefaultTask(void *argument)
+{
+  HAL_GPIO_WritePin(LED_GPIO_PORT, LED_PIN, GPIO_PIN_RESET);
+
+  for (;;)
+  {
+    HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_PIN);
+    osDelay(500);
+  }
+}
+
+void SystemClock_Config(void)
+{
+  // Настройка тактового сигнала (этот код обычно генерируется CubeMX)
+}
+
+void MX_GPIO_Init(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+
+  GPIO_InitStruct.Pin = LED_PIN;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(LED_GPIO_PORT, &GPIO_InitStruct);
+}
+
+
+
+
+
+#ifndef FREERTOS_CONFIG_H
+#define FREERTOS_CONFIG_H
+
+#include "stm32f1xx.h"
+
+// Конфигурация FreeRTOS
+#define configUSE_PREEMPTION            1
+#define configUSE_IDLE_HOOK             0
+#define configUSE_TICK_HOOK             0
+#define configCPU_CLOCK_HZ              ( SystemCoreClock )
+#define configTICK_RATE_HZ              ( ( TickType_t ) 1000 )
+#define configMAX_PRIORITIES            ( 5 )
+#define configMINIMAL_STACK_SIZE        ( ( unsigned short ) 130 )
+#define configTOTAL_HEAP_SIZE           ( ( size_t ) ( 10 * 1024 ) )
+#define configMAX_TASK_NAME_LEN         ( 10 )
+#define configUSE_16_BIT_TICKS          0
+#define configIDLE_SHOULD_YIELD         1
+#define configUSE_MUTEXES               1
+#define configQUEUE_REGISTRY_SIZE       8
+#define configCHECK_FOR_STACK_OVERFLOW  0
+#define configUSE_RECURSIVE_MUTEXES     1
+#define configUSE_MALLOC_FAILED_HOOK    0
+#define configUSE_APPLICATION_TASK_TAG  0
+#define configUSE_COUNTING_SEMAPHORES   1
+
+// Конфигурация системных обработчиков
+#define configUSE_PORT_OPTIMISED_TASK_SELECTION 1
+#define configUSE_TICKLESS_IDLE                 0
+#define configUSE_STATS_FORMATTING_FUNCTIONS    1
+
+// Прерывания
+#define configKERNEL_INTERRUPT_PRIORITY         255
+#define configMAX_SYSCALL_INTERRUPT_PRIORITY    191 // эквивалент 0xC0, 3 << 5
+#define configLIBRARY_KERNEL_INTERRUPT_PRIORITY 15
+
+#endif /* FREERTOS_CONFIG_H */
+
+
+
+
