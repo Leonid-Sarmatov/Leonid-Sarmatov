@@ -240,3 +240,52 @@ $(TARGET).elf: $(OBJS)
 # Правило для очистки
 clean:
 	rm -f $(OBJS) $(TARGET).elf $(TARGET).bin $(TARGET).map
+
+
+
+
+
+
+# Имя исполняемого файла
+TARGET = myprogram
+
+# Компилятор и утилиты
+CC = arm-none-eabi-g++
+AS = arm-none-eabi-as
+OBJCOPY = arm-none-eabi-objcopy
+
+# Директории
+SRC_DIR = Src
+INC_DIR = Inc
+FREERTOS_DIR = FreeRTOS/Source
+PORT_DIR = $(FREERTOS_DIR)/portable/GCC/ARM_CM3
+
+# Флаги компиляции и линковки
+CFLAGS = -I$(INC_DIR) -I$(FREERTOS_DIR)/include -I$(PORT_DIR) -I$(SRC_DIR) -DSTM32F103xB -DUSE_HAL_DRIVER -O2 -Wall -fdata-sections -ffunction-sections
+LDFLAGS = -TSTM32F103C8TX_FLASH.ld -Wl,--gc-sections -Wl,-Map=$(TARGET).map
+
+# Исходные и объектные файлы
+SRCS = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/*.c) $(wildcard $(FREERTOS_DIR)/*.c) $(wildcard $(PORT_DIR)/*.c)
+OBJS = $(SRCS:.cpp=.o)
+OBJS += $(SRCS:.c=.o)
+
+# Правило по умолчанию
+all: $(TARGET).elf $(TARGET).hex
+
+# Правило для создания исполняемого файла
+$(TARGET).elf: $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LDFLAGS)
+	$(OBJCOPY) -O binary $@ $(TARGET).bin
+	$(OBJCOPY) -O ihex $@ $(TARGET).hex
+
+# Правило для компиляции исходных файлов
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Правило для очистки
+clean:
+	rm -f $(OBJS) $(TARGET).elf $(TARGET).bin $(TARGET).hex $(TARGET).map
+
