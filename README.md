@@ -57,235 +57,190 @@ Here are some ideas to get you started:
 
 
 
-MyProject/
-├── FreeRTOS/
-│   ├── Source/
-│   │   ├── include/
-│   │   ├── portable/
-│   │   │   ├── GCC/
-│   │   │   │   └── ARM_CM3/
-│   │   │   └── MemMang/
-│   │   │       ├── heap_1.c
-│   │   │       ├── heap_2.c
-│   │   │       ├── heap_3.c
-│   │   │       ├── heap_4.c
-│   │   │       └── heap_5.c
-│   │   ├── croutine.c
-│   │   ├── list.c
-│   │   ├── queue.c
-│   │   ├── tasks.c
-│   │   ├── timers.c
-│   │   └── ...
-│   ├── CMSIS_RTOS/
-│   │   ├── include/
-│   │   ├── os.h
-│   │   ├── os.c
-│   │   └── ...
-├── Inc/
-│   ├── stm32f1xx_hal_conf.h
-│   ├── stm32f1xx_it.h
-│   ├── main.h
-│   ├── FreeRTOSConfig.h
-│   └── ...
-├── Src/
-│   ├── main.c
-│   ├── stm32f1xx_hal_msp.c
-│   ├── stm32f1xx_it.c
-│   ├── startup_stm32f103xx.s
-│   ├── system_stm32f1xx.c
-│   └── ...
-├── Makefile
-└── README.md
+
+# toolchain
+TOOLCHAIN    = arm-none-eabi-
+CC           = $(TOOLCHAIN)gcc
+CP           = $(TOOLCHAIN)objcopy
+AS           = $(TOOLCHAIN)gcc -x assembler-with-cpp
+HEX          = $(CP) -O ihex
+BIN          = $(CP) -O binary -S
+
+# define mcu, specify the target processor
+MCU          = cortex-m4
+
+# all the files will be generated with this name (main.elf, main.bin, main.hex, etc)
+PROJECT_NAME=application
+
+# specify define
+DDEFS       =
+
+# define root dir
+ROOT_DIR     = .
+
+# define include dir
+INCLUDE_DIRS =
+
+# define include dir
+USER_DIR =  $(ROOT_DIR)/user
+
+# define stm32f10x lib dir
+LIB_DIR      = $(ROOT_DIR)/bsp/libraries
+
+# define freertos dir
+FREERTOS_DIR = $(ROOT_DIR)/bsp/middlewares/freertos/source
 
 
+# link file
+LINK_SCRIPT  = $(ROOT_DIR)/ld/AT32F437xM_FLASH.ld
+
+# user code
+SRC       =
+ASM_SRC   =
+SRC      += $(USER_DIR)/main.c
+SRC      += $(USER_DIR)/at32f435_437_clock.c
+SRC      += $(USER_DIR)/at32f435_437_int.c
+
+# user include
+INCLUDE_DIRS  = $(USER_DIR)
 
 
+# ******************** artery lib begin  *******************
+# STD Defines
+DDEFS += -DAT32F437VMT7 -DUSE_STDPERIPH_DRIVER# -DHSE_VALUE=8000000
 
-#include "main.h"
-#include "cmsis_os.h"
+# source director
+CORE_DIR    = $(LIB_DIR)/cmsis/cm4/core_support
+DEVICE_DIR  = $(LIB_DIR)/cmsis/cm4/device_support
+SRC_DIR     = $(LIB_DIR)/drivers/src
+INC_DIR_     = $(LIB_DIR)/drivers/inc
 
-// Определение светодиода (предполагаем, что он подключен к порту GPIOA, пину 5)
-#define LED_PIN GPIO_PIN_5
-#define LED_GPIO_PORT GPIOA
+# startup
+ASM_SRC  += $(DEVICE_DIR)/startup/gcc/startup_at32f435_437.s
 
-void SystemClock_Config(void);
-void MX_GPIO_Init(void);
-void StartDefaultTask(void *argument);
+# CMSIS
+SRC  += $(DEVICE_DIR)/system_at32f435_437.c
 
-int main(void)
-{
-  HAL_Init();
-  SystemClock_Config();
-  MX_GPIO_Init();
+# use libraries, please add or remove when you use or remove it.
+SRC  += $(SRC_DIR)/at32f435_437_acc.c
+SRC  += $(SRC_DIR)/at32f435_437_adc.c
+SRC  += $(SRC_DIR)/at32f435_437_can.c
+SRC  += $(SRC_DIR)/at32f435_437_crc.c
+SRC  += $(SRC_DIR)/at32f435_437_crm.c
+SRC  += $(SRC_DIR)/at32f435_437_dac.c
+SRC  += $(SRC_DIR)/at32f435_437_debug.c
+SRC  += $(SRC_DIR)/at32f435_437_dma.c
+SRC  += $(SRC_DIR)/at32f435_437_dvp.c
+SRC  += $(SRC_DIR)/at32f435_437_edma.c
+SRC  += $(SRC_DIR)/at32f435_437_emac.c
+SRC  += $(SRC_DIR)/at32f435_437_ertc.c
+SRC  += $(SRC_DIR)/at32f435_437_exint.c
+SRC  += $(SRC_DIR)/at32f435_437_flash.c
+SRC  += $(SRC_DIR)/at32f435_437_gpio.c
+SRC  += $(SRC_DIR)/at32f435_437_i2c.c
+SRC  += $(SRC_DIR)/at32f435_437_misc.c
+SRC  += $(SRC_DIR)/at32f435_437_pwc.c
+SRC  += $(SRC_DIR)/at32f435_437_qspi.c
+SRC  += $(SRC_DIR)/at32f435_437_scfg.c
+SRC  += $(SRC_DIR)/at32f435_437_sdio.c
+SRC  += $(SRC_DIR)/at32f435_437_spi.c
+SRC  += $(SRC_DIR)/at32f435_437_tmr.c
+SRC  += $(SRC_DIR)/at32f435_437_usart.c
+SRC  += $(SRC_DIR)/at32f435_437_usb.c
+SRC  += $(SRC_DIR)/at32f435_437_wdt.c
+SRC  += $(SRC_DIR)/at32f435_437_wwdt.c
+SRC  += $(SRC_DIR)/at32f435_437_xmc.c 
 
-  osKernelInitialize();
-
-  // Создание задачи мигания светодиодом
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
-  osThreadCreate(osThread(defaultTask), NULL);
-
-  osKernelStart();
-
-  while (1)
-  {
-  }
-}
-
-void StartDefaultTask(void *argument)
-{
-  HAL_GPIO_WritePin(LED_GPIO_PORT, LED_PIN, GPIO_PIN_RESET);
-
-  for (;;)
-  {
-    HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_PIN);
-    osDelay(500);
-  }
-}
-
-void SystemClock_Config(void)
-{
-  // Настройка тактового сигнала (этот код обычно генерируется CubeMX)
-}
-
-void MX_GPIO_Init(void)
-{
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-
-  GPIO_InitStruct.Pin = LED_PIN;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LED_GPIO_PORT, &GPIO_InitStruct);
-}
+# include directories
+INCLUDE_DIRS += $(CORE_DIR)
+INCLUDE_DIRS += $(DEVICE_DIR)
+INCLUDE_DIRS += $(INC_DIR_)
+# ********************* artery lib end  ********************
 
 
+# ******************** free rtos begin  ********************
+# source director
+FREERTOS_SRC_DIR     = $(FREERTOS_DIR)
+FREERTOS_INC_DIR     = $(FREERTOS_DIR)/include
+FREERTOS_ARM_CM4_DIR = $(FREERTOS_DIR)/portable/GCC/ARM_CM4F
+FREERTOS_MemMang_DIR = $(FREERTOS_DIR)/portable/memmang
 
+# add freertos source
+#SRC  += $(FREERTOS_SRC_DIR)/list.c
+#SRC  += $(FREERTOS_SRC_DIR)/queue.c
+#SRC  += $(FREERTOS_SRC_DIR)/croutine.c
+#SRC  += $(FREERTOS_SRC_DIR)/tasks.c
 
+#SRC  += $(FREERTOS_ARM_CM4_DIR)/port.c
 
-#ifndef FREERTOS_CONFIG_H
-#define FREERTOS_CONFIG_H
+#SRC  += $(FREERTOS_MemMang_DIR)/heap_4.c
 
-#include "stm32f1xx.h"
-
-// Конфигурация FreeRTOS
-#define configUSE_PREEMPTION            1
-#define configUSE_IDLE_HOOK             0
-#define configUSE_TICK_HOOK             0
-#define configCPU_CLOCK_HZ              ( SystemCoreClock )
-#define configTICK_RATE_HZ              ( ( TickType_t ) 1000 )
-#define configMAX_PRIORITIES            ( 5 )
-#define configMINIMAL_STACK_SIZE        ( ( unsigned short ) 130 )
-#define configTOTAL_HEAP_SIZE           ( ( size_t ) ( 10 * 1024 ) )
-#define configMAX_TASK_NAME_LEN         ( 10 )
-#define configUSE_16_BIT_TICKS          0
-#define configIDLE_SHOULD_YIELD         1
-#define configUSE_MUTEXES               1
-#define configQUEUE_REGISTRY_SIZE       8
-#define configCHECK_FOR_STACK_OVERFLOW  0
-#define configUSE_RECURSIVE_MUTEXES     1
-#define configUSE_MALLOC_FAILED_HOOK    0
-#define configUSE_APPLICATION_TASK_TAG  0
-#define configUSE_COUNTING_SEMAPHORES   1
-
-// Конфигурация системных обработчиков
-#define configUSE_PORT_OPTIMISED_TASK_SELECTION 1
-#define configUSE_TICKLESS_IDLE                 0
-#define configUSE_STATS_FORMATTING_FUNCTIONS    1
-
-// Прерывания
-#define configKERNEL_INTERRUPT_PRIORITY         255
-#define configMAX_SYSCALL_INTERRUPT_PRIORITY    191 // эквивалент 0xC0, 3 << 5
-#define configLIBRARY_KERNEL_INTERRUPT_PRIORITY 15
-
-#endif /* FREERTOS_CONFIG_H */
-
-
-
-
-# Имя исполняемого файла
-TARGET = myprogram
-
-# Компилятор и утилиты
-CC = arm-none-eabi-gcc
-AS = arm-none-eabi-as
-OBJCOPY = arm-none-eabi-objcopy
-
-# Директории
-SRC_DIR = Src
-INC_DIR = Inc
-FREERTOS_DIR = FreeRTOS/Source
-PORT_DIR = $(FREERTOS_DIR)/portable/GCC/ARM_CM3
-
-# Флаги компиляции и линковки
-CFLAGS = -I$(INC_DIR) -I$(FREERTOS_DIR)/include -I$(PORT_DIR) -I$(SRC_DIR) -DSTM32F103xB -DUSE_HAL_DRIVER -O2 -Wall -fdata-sections -ffunction-sections
-LDFLAGS = -TSTM32F103C8TX_FLASH.ld -Wl,--gc-sections -Wl,-Map=$(TARGET).map
-
-# Исходные и объектные файлы
-SRCS = $(wildcard $(SRC_DIR)/*.c) $(wildcard $(FREERTOS_DIR)/*.c) $(wildcard $(PORT_DIR)/*.c)
-OBJS = $(SRCS:.c=.o)
-
-# Правило по умолчанию
-all: $(TARGET).elf
-
-# Правило для создания исполняемого файла
-$(TARGET).elf: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LDFLAGS)
-	$(OBJCOPY) -O binary $@ $(TARGET).bin
-
-# Правило для компиляции исходных файлов
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Правило для очистки
-clean:
-	rm -f $(OBJS) $(TARGET).elf $(TARGET).bin $(TARGET).map
+# include directories
+#INCLUDE_DIRS += $(FREERTOS_INC_DIR)
+#INCLUDE_DIRS += $(FREERTOS_ARM_CM4_DIR)
+# ********************* free rtos end *********************
 
 
 
 
 
 
-# Имя исполняемого файла
-TARGET = myprogram
+INC_DIR  = $(patsubst %, -I%, $(INCLUDE_DIRS))
 
-# Компилятор и утилиты
-CC = arm-none-eabi-g++
-AS = arm-none-eabi-as
-OBJCOPY = arm-none-eabi-objcopy
+# run from Flash
+DEFS	 = $(DDEFS) -DRUN_FROM_FLASH=1
 
-# Директории
-SRC_DIR = Src
-INC_DIR = Inc
-FREERTOS_DIR = FreeRTOS/Source
-PORT_DIR = $(FREERTOS_DIR)/portable/GCC/ARM_CM3
+#C_SRC           := $(wildcard *.c)
+#ASM_SRC         := $(wildcard *.S)
+#OBJECTS         := $(patsubst %,$(BUILD_DIR)/%.o,$(C_SRC))
+#OBJECTS         += $(patsubst %,$(BUILD_DIR)/%.o,$(ASM_SRC))
 
-# Флаги компиляции и линковки
-CFLAGS = -I$(INC_DIR) -I$(FREERTOS_DIR)/include -I$(PORT_DIR) -I$(SRC_DIR) -DSTM32F103xB -DUSE_HAL_DRIVER -O2 -Wall -fdata-sections -ffunction-sections
-LDFLAGS = -TSTM32F103C8TX_FLASH.ld -Wl,--gc-sections -Wl,-Map=$(TARGET).map
+OBJECTS  = $(ASM_SRC:.s=.o) $(SRC:.c=.o)
 
-# Исходные и объектные файлы
-SRCS = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/*.c) $(wildcard $(FREERTOS_DIR)/*.c) $(wildcard $(PORT_DIR)/*.c)
-OBJS = $(SRCS:.cpp=.o)
-OBJS += $(SRCS:.c=.o)
+# Define optimisation level here
+OPT = -Os
 
-# Правило по умолчанию
-all: $(TARGET).elf $(TARGET).hex
+MC_FLAGS = -mcpu=$(MCU)
 
-# Правило для создания исполняемого файла
-$(TARGET).elf: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LDFLAGS)
-	$(OBJCOPY) -O binary $@ $(TARGET).bin
-	$(OBJCOPY) -O ihex $@ $(TARGET).hex
+AS_FLAGS = $(MC_FLAGS) -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -g -gdwarf-2 -mthumb  -Wa,-amhls=$(<:.s=.lst)
+CP_FLAGS = $(MC_FLAGS) $(OPT) -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -g -gdwarf-2 -mthumb -fomit-frame-pointer -Wall -fverbose-asm -Wa,-ahlms=$(<:.c=.lst) $(DEFS)
+LD_FLAGS = $(MC_FLAGS) -g -gdwarf-2 -mthumb -nostartfiles -Xlinker --gc-sections -T$(LINK_SCRIPT) -Wl,-Map=$(PROJECT_NAME).map,--cref,--no-warn-mismatch
 
-# Правило для компиляции исходных файлов
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+#
+# makefile rules
+#
+all: $(OBJECTS) $(PROJECT_NAME).elf  $(PROJECT_NAME).hex $(PROJECT_NAME).bin
+	$(TOOLCHAIN)size $(PROJECT_NAME).elf
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -c $(CP_FLAGS) -I . $(INC_DIR) $< -o $@
 
-# Правило для очистки
+%.o: %.s
+	$(AS) -c $(AS_FLAGS) $< -o $@
+
+%.elf: $(OBJECTS)
+	$(CC) $(OBJECTS) $(LD_FLAGS) -o $@
+
+%.hex: %.elf
+	$(HEX) $< $@
+
+%.bin: %.elf
+	$(BIN)  $< $@
+
+flash: $(PROJECT_NAME).bin
+	st-flash write $(PROJECT_NAME).bin 0x8000000
+
+erase:
+	st-flash erase
+
 clean:
-	rm -f $(OBJS) $(TARGET).elf $(TARGET).bin $(TARGET).hex $(TARGET).map
+	-rm -rf $(OBJECTS)
+	-rm -rf $(PROJECT_NAME).elf
+	-rm -rf $(PROJECT_NAME).map
+	-rm -rf $(PROJECT_NAME).hex
+	-rm -rf $(PROJECT_NAME).bin
+	-rm -rf $(SRC:.c=.lst)
+	-rm -rf $(ASM_SRC:.s=.lst)
+
+
 
