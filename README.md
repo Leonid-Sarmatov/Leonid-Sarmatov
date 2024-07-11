@@ -58,201 +58,6 @@ Here are some ideas to get you started:
 
 
 
-# toolchain
-TOOLCHAIN    = arm-none-eabi-
-CC           = $(TOOLCHAIN)gcc
-CP           = $(TOOLCHAIN)objcopy
-AS           = $(TOOLCHAIN)gcc -x assembler-with-cpp
-HEX          = $(CP) -O ihex
-BIN          = $(CP) -O binary -S
-
-# define mcu, specify the target processor
-MCU          = cortex-m4
-
-# all the files will be generated with this name (main.elf, main.bin, main.hex, etc)
-PROJECT_NAME=application
-
-# specify define
-DDEFS       =
-
-# define root dir
-ROOT_DIR     = .
-
-# define include dir
-INCLUDE_DIRS =
-
-# define include dir
-USER_DIR =  $(ROOT_DIR)/user
-
-# define stm32f10x lib dir
-LIB_DIR      = $(ROOT_DIR)/bsp/libraries
-
-# define freertos dir
-FREERTOS_DIR = $(ROOT_DIR)/bsp/middlewares/freertos/source
-
-
-# link file
-LINK_SCRIPT  = $(ROOT_DIR)/ld/AT32F437xM_FLASH.ld
-
-# user code
-SRC       =
-ASM_SRC   =
-SRC      += $(USER_DIR)/main.c
-SRC      += $(USER_DIR)/at32f435_437_clock.c
-SRC      += $(USER_DIR)/at32f435_437_int.c
-
-# user include
-INCLUDE_DIRS  = $(USER_DIR)
-
-
-# ******************** artery lib begin  *******************
-# STD Defines
-DDEFS += -DAT32F437VMT7 -DUSE_STDPERIPH_DRIVER# -DHSE_VALUE=8000000
-
-# source director
-CORE_DIR    = $(LIB_DIR)/cmsis/cm4/core_support
-DEVICE_DIR  = $(LIB_DIR)/cmsis/cm4/device_support
-SRC_DIR     = $(LIB_DIR)/drivers/src
-INC_DIR_     = $(LIB_DIR)/drivers/inc
-
-# startup
-ASM_SRC  += $(DEVICE_DIR)/startup/gcc/startup_at32f435_437.s
-
-# CMSIS
-SRC  += $(DEVICE_DIR)/system_at32f435_437.c
-
-# use libraries, please add or remove when you use or remove it.
-SRC  += $(SRC_DIR)/at32f435_437_acc.c
-SRC  += $(SRC_DIR)/at32f435_437_adc.c
-SRC  += $(SRC_DIR)/at32f435_437_can.c
-SRC  += $(SRC_DIR)/at32f435_437_crc.c
-SRC  += $(SRC_DIR)/at32f435_437_crm.c
-SRC  += $(SRC_DIR)/at32f435_437_dac.c
-SRC  += $(SRC_DIR)/at32f435_437_debug.c
-SRC  += $(SRC_DIR)/at32f435_437_dma.c
-SRC  += $(SRC_DIR)/at32f435_437_dvp.c
-SRC  += $(SRC_DIR)/at32f435_437_edma.c
-SRC  += $(SRC_DIR)/at32f435_437_emac.c
-SRC  += $(SRC_DIR)/at32f435_437_ertc.c
-SRC  += $(SRC_DIR)/at32f435_437_exint.c
-SRC  += $(SRC_DIR)/at32f435_437_flash.c
-SRC  += $(SRC_DIR)/at32f435_437_gpio.c
-SRC  += $(SRC_DIR)/at32f435_437_i2c.c
-SRC  += $(SRC_DIR)/at32f435_437_misc.c
-SRC  += $(SRC_DIR)/at32f435_437_pwc.c
-SRC  += $(SRC_DIR)/at32f435_437_qspi.c
-SRC  += $(SRC_DIR)/at32f435_437_scfg.c
-SRC  += $(SRC_DIR)/at32f435_437_sdio.c
-SRC  += $(SRC_DIR)/at32f435_437_spi.c
-SRC  += $(SRC_DIR)/at32f435_437_tmr.c
-SRC  += $(SRC_DIR)/at32f435_437_usart.c
-SRC  += $(SRC_DIR)/at32f435_437_usb.c
-SRC  += $(SRC_DIR)/at32f435_437_wdt.c
-SRC  += $(SRC_DIR)/at32f435_437_wwdt.c
-SRC  += $(SRC_DIR)/at32f435_437_xmc.c 
-
-# include directories
-INCLUDE_DIRS += $(CORE_DIR)
-INCLUDE_DIRS += $(DEVICE_DIR)
-INCLUDE_DIRS += $(INC_DIR_)
-# ********************* artery lib end  ********************
-
-
-# ******************** free rtos begin  ********************
-# source director
-FREERTOS_SRC_DIR     = $(FREERTOS_DIR)
-FREERTOS_INC_DIR     = $(FREERTOS_DIR)/include
-FREERTOS_ARM_CM4_DIR = $(FREERTOS_DIR)/portable/GCC/ARM_CM4F
-FREERTOS_MemMang_DIR = $(FREERTOS_DIR)/portable/memmang
-
-# add freertos source
-#SRC  += $(FREERTOS_SRC_DIR)/list.c
-#SRC  += $(FREERTOS_SRC_DIR)/queue.c
-#SRC  += $(FREERTOS_SRC_DIR)/croutine.c
-#SRC  += $(FREERTOS_SRC_DIR)/tasks.c
-
-#SRC  += $(FREERTOS_ARM_CM4_DIR)/port.c
-
-#SRC  += $(FREERTOS_MemMang_DIR)/heap_4.c
-
-# include directories
-#INCLUDE_DIRS += $(FREERTOS_INC_DIR)
-#INCLUDE_DIRS += $(FREERTOS_ARM_CM4_DIR)
-# ********************* free rtos end *********************
-
-
-
-
-
-
-INC_DIR  = $(patsubst %, -I%, $(INCLUDE_DIRS))
-
-# run from Flash
-DEFS	 = $(DDEFS) -DRUN_FROM_FLASH=1
-
-#C_SRC           := $(wildcard *.c)
-#ASM_SRC         := $(wildcard *.S)
-#OBJECTS         := $(patsubst %,$(BUILD_DIR)/%.o,$(C_SRC))
-#OBJECTS         += $(patsubst %,$(BUILD_DIR)/%.o,$(ASM_SRC))
-
-OBJECTS  = $(ASM_SRC:.s=.o) $(SRC:.c=.o)
-
-# Define optimisation level here
-OPT = -Os
-
-MC_FLAGS = -mcpu=$(MCU)
-
-AS_FLAGS = $(MC_FLAGS) -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -g -gdwarf-2 -mthumb  -Wa,-amhls=$(<:.s=.lst)
-CP_FLAGS = $(MC_FLAGS) $(OPT) -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -g -gdwarf-2 -mthumb -fomit-frame-pointer -Wall -fverbose-asm -Wa,-ahlms=$(<:.c=.lst) $(DEFS)
-LD_FLAGS = $(MC_FLAGS) -g -gdwarf-2 -mthumb -nostartfiles -Xlinker --gc-sections -T$(LINK_SCRIPT) -Wl,-Map=$(PROJECT_NAME).map,--cref,--no-warn-mismatch
-
-#
-# makefile rules
-#
-all: $(OBJECTS) $(PROJECT_NAME).elf  $(PROJECT_NAME).hex $(PROJECT_NAME).bin
-	$(TOOLCHAIN)size $(PROJECT_NAME).elf
-
-%.o: %.c
-	$(CC) -c $(CP_FLAGS) -I . $(INC_DIR) $< -o $@
-
-%.o: %.s
-	$(AS) -c $(AS_FLAGS) $< -o $@
-
-%.elf: $(OBJECTS)
-	$(CC) $(OBJECTS) $(LD_FLAGS) -o $@
-
-%.hex: %.elf
-	$(HEX) $< $@
-
-%.bin: %.elf
-	$(BIN)  $< $@
-
-flash: $(PROJECT_NAME).bin
-	st-flash write $(PROJECT_NAME).bin 0x8000000
-
-erase:
-	st-flash erase
-
-clean:
-	-rm -rf $(OBJECTS)
-	-rm -rf $(PROJECT_NAME).elf
-	-rm -rf $(PROJECT_NAME).map
-	-rm -rf $(PROJECT_NAME).hex
-	-rm -rf $(PROJECT_NAME).bin
-	-rm -rf $(SRC:.c=.lst)
-	-rm -rf $(ASM_SRC:.s=.lst)
-
-
-
-
-
-
-
-
-
-
-
-
 ##########################################################################################################################
 # File automatically-generated by tool: [projectgenerator] version: [2.26.0] date: [Fri Apr 13 10:23:08 CST 2018] 
 ##########################################################################################################################
@@ -268,7 +73,7 @@ clean:
 ######################################
 # target
 ######################################
-TARGET = stm32proj
+TARGET = app
 
 
 ######################################
@@ -304,34 +109,35 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
-bsp/drivers/src/at32f435_437_acc.c \
-bsp/drivers/src/at32f435_437_adc.c \
-bsp/drivers/src/at32f435_437_can.c \
-bsp/drivers/src/at32f435_437_crc.c \
-bsp/drivers/src/at32f435_437_crm.c \
-bsp/drivers/src/at32f435_437_dac.c \
-bsp/drivers/src/at32f435_437_debug.c \
-bsp/drivers/src/at32f435_437_dma.c \
-bsp/drivers/src/at32f435_437_dvp.c \
-bsp/drivers/src/at32f435_437_edma.c \
-bsp/drivers/src/at32f435_437_emac.c \
-bsp/drivers/src/at32f435_437_ertc.c \
-bsp/drivers/src/at32f435_437_exint.c \
-bsp/drivers/src/at32f435_437_flash.c \
-bsp/drivers/src/at32f435_437_gpio.c \
-bsp/drivers/src/at32f435_437_i2c.c \
-bsp/drivers/src/at32f435_437_misc.c \
-bsp/drivers/src/at32f435_437_pwc.c \
-bsp/drivers/src/at32f435_437_qspi.c \
-bsp/drivers/src/at32f435_437_scfg.c \
-bsp/drivers/src/at32f435_437_sdio.c \
-bsp/drivers/src/at32f435_437_spi.c \
-bsp/drivers/src/at32f435_437_tmr.c \
-bsp/drivers/src/at32f435_437_usart.c \
-bsp/drivers/src/at32f435_437_usb.c \
-bsp/drivers/src/at32f435_437_wdt.c \
-bsp/drivers/src/at32f435_437_wwdt.c \
-bsp/drivers/src/at32f435_437_xmc.c \
+bsp/libraries/cmsis/cm4/device_support/system_at32f435_437.c \
+bsp/libraries/drivers/src/at32f435_437_acc.c \
+bsp/libraries/drivers/src/at32f435_437_adc.c \
+bsp/libraries/drivers/src/at32f435_437_can.c \
+bsp/libraries/drivers/src/at32f435_437_crc.c \
+bsp/libraries/drivers/src/at32f435_437_crm.c \
+bsp/libraries/drivers/src/at32f435_437_dac.c \
+bsp/libraries/drivers/src/at32f435_437_debug.c \
+bsp/libraries/drivers/src/at32f435_437_dma.c \
+bsp/libraries/drivers/src/at32f435_437_dvp.c \
+bsp/libraries/drivers/src/at32f435_437_edma.c \
+bsp/libraries/drivers/src/at32f435_437_emac.c \
+bsp/libraries/drivers/src/at32f435_437_ertc.c \
+bsp/libraries/drivers/src/at32f435_437_exint.c \
+bsp/libraries/drivers/src/at32f435_437_flash.c \
+bsp/libraries/drivers/src/at32f435_437_gpio.c \
+bsp/libraries/drivers/src/at32f435_437_i2c.c \
+bsp/libraries/drivers/src/at32f435_437_misc.c \
+bsp/libraries/drivers/src/at32f435_437_pwc.c \
+bsp/libraries/drivers/src/at32f435_437_qspi.c \
+bsp/libraries/drivers/src/at32f435_437_scfg.c \
+bsp/libraries/drivers/src/at32f435_437_sdio.c \
+bsp/libraries/drivers/src/at32f435_437_spi.c \
+bsp/libraries/drivers/src/at32f435_437_tmr.c \
+bsp/libraries/drivers/src/at32f435_437_usart.c \
+bsp/libraries/drivers/src/at32f435_437_usb.c \
+bsp/libraries/drivers/src/at32f435_437_wdt.c \
+bsp/libraries/drivers/src/at32f435_437_wwdt.c \
+bsp/libraries/drivers/src/at32f435_437_xmc.c \
 bsp/middlewares/freertos/source/croutine.c \
 bsp/middlewares/freertos/source/event_groups.c \
 bsp/middlewares/freertos/source/list.c \
@@ -339,6 +145,7 @@ bsp/middlewares/freertos/source/queue.c \
 bsp/middlewares/freertos/source/stream_buffer.c \
 bsp/middlewares/freertos/source/tasks.c \
 bsp/middlewares/freertos/source/timers.c \
+bsp/middlewares/freertos/source/portable/memmang/heap_4.c \
 src/at32f435_437_clock.c \
 src/at32f435_437_int.c \
 src/main.c
@@ -348,7 +155,7 @@ CXX_SOURCES =
 
 # ASM sources
 ASM_SOURCES =  \
-startup_at32f435_437.s
+bsp/libraries/cmsis/cm4/device_support/startup/gcc/startup_at32f435_437.s
 
 
 ######################################
@@ -360,7 +167,7 @@ PERIFLIB_SOURCES =
 #######################################
 # binaries
 #######################################
-BINPATH = 
+BINPATH =
 PREFIX = arm-none-eabi-
 CC = $(BINPATH)$(PREFIX)gcc
 CXX = $(BINPATH)$(PREFIX)g++
@@ -405,11 +212,14 @@ AS_INCLUDES =  \
 # C includes
 C_INCLUDES =  \
 -Iinc \
+-Ibsp/libraries/drivers/inc \
+-Ibsp/libraries/cmsis/cm4/device_support \
+-Ibsp/libraries/cmsis/cm4/core_support \
+-Ibsp/middlewares/freertos/source/include \
+-Ibsp/middlewares/freertos/source/portable/GCC/ARM_CM4F
 
 
-CXX_INCLUDES =  \
--IMiddlewares/cxxsource \
--IMiddlewares/HARDWARE/include
+CXX_INCLUDES = 
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
@@ -433,7 +243,7 @@ CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)"
 # LDFLAGS
 #######################################
 # link script
-LDSCRIPT = STM32F103C8Tx_FLASH.ld
+LDSCRIPT = ld/AT32F437xM_FLASH.ld
 
 # libraries
 LIBS = -lc -lm -lnosys
@@ -482,12 +292,12 @@ $(BUILD_DIR):
 	mkdir $@		
 
 #---------------------------- write to mcu -----------------------------#
-flash: 
-	st-flash write build/$(TARGET).bin 0x8000000
+#flash: 
+#	st-flash write build/$(TARGET).bin 0x8000000
 
 #---------------------------- Jlink ---------------------------------#
-install:
-	JLinkExe -device STM32F103C8 -if swd -speed 4000
+#install:
+#	JLinkExe -device STM32F103C8 -if swd -speed 4000
 	#loadbin build/$(TARGET).bin 0x8000000
 
 #######################################
