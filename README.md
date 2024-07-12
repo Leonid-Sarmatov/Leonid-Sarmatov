@@ -269,6 +269,9 @@ vpath %.cpp $(sort $(dir $(CXX_SOURCES)))
 OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
 vpath %.s $(sort $(dir $(ASM_SOURCES)))
 
+$(BUILD_DIR):
+	mkdir $@
+
 $(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR) 
 	$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
 
@@ -286,10 +289,7 @@ $(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 	$(HEX) $< $@
 	
 $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
-	$(BIN) $< $@	
-	
-$(BUILD_DIR):
-	mkdir $@		
+	$(BIN) $< $@			
 
 #---------------------------- write to mcu -----------------------------#
 #flash: 
@@ -304,11 +304,6 @@ $(BUILD_DIR):
 # clean up
 #######################################
 clean:
-	-rm -fR .dep $(BUILD_DIR)
-  
-#######################################
-# dependencies
-#######################################
--include $(shell mkdir .dep 2>/dev/null) $(wildcard .dep/*)
+	rmdir /s $(BUILD_DIR)
 
 # *** EOF ***
