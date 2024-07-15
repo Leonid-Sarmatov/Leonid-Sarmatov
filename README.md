@@ -82,7 +82,7 @@ TARGET = app
 # debug build?
 DEBUG = 1
 # optimization
-OPT = -Og
+OPT = -O0
 
 
 #######################################
@@ -94,6 +94,9 @@ bsp/libraries/cmsis/cm4/device_support/startup/gcc \
 bsp/libraries/cmsis/cm4/device_support \
 bsp/libraries/drivers/src \
 src \
+src/led_driver \
+src/button_driver \
+src/bootloader \
 bsp/middlewares/freertos/source \
 bsp/middlewares/freertos/source/portable/GCC/ARM_CM4F
 
@@ -146,6 +149,10 @@ bsp/middlewares/freertos/source/stream_buffer.c \
 bsp/middlewares/freertos/source/tasks.c \
 bsp/middlewares/freertos/source/timers.c \
 bsp/middlewares/freertos/source/portable/memmang/heap_4.c \
+bsp/middlewares/freertos/source/portable/GCC/ARM_CM4F/port.c \
+src/led_driver/led_driver.c \
+src/button_driver/button_driver.c \
+src/bootloader/bootloader.c \
 src/at32f435_437_clock.c \
 src/at32f435_437_int.c \
 src/main.c
@@ -199,8 +206,9 @@ AS_DEFS =
 
 # C defines
 C_DEFS =  \
--DUSE_STDPERIPH_DRIVER \
--DAT32F437VMT7
+-DAT_START_F437_V1 \
+-DAT32F437VMT7 \
+-DUSE_STDPERIPH_DRIVER
 
 # C++ defines
 CXX_DEFS =
@@ -211,20 +219,23 @@ AS_INCLUDES =  \
 
 # C includes
 C_INCLUDES =  \
--Iinc \
+-Iinc/led_driver \
+-Iinc/button_driver \
+-Iinc/bootloader \
 -Ibsp/libraries/drivers/inc \
 -Ibsp/libraries/cmsis/cm4/device_support \
 -Ibsp/libraries/cmsis/cm4/core_support \
 -Ibsp/middlewares/freertos/source/include \
--Ibsp/middlewares/freertos/source/portable/GCC/ARM_CM4F
+-Ibsp/middlewares/freertos/source/portable/GCC/ARM_CM4F \
+-Iinc 
 
 
 CXX_INCLUDES = 
 
 # compile gcc flags
-ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
+ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 
-CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
+CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
 
 CXXFLAGS = -lstdc++ $(CFLAGS) $(CXX_DEFS) $(CXX_INCLUDES) -g -ggdb3 -fno-rtti -fno-exceptions \
 -fverbose-asm -fdata-sections -ffunction-sections -fpermissive -Wa,-ahlms=$(BUILD_DIR)/$(notdir $(<:.cpp=.lst))
@@ -248,7 +259,8 @@ LDSCRIPT = ld/AT32F437xM_FLASH.ld
 # libraries
 LIBS = -lc -lm -lnosys
 LIBDIR =
-LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
+# LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
+LDFLAGS = $(MCU) -specs=nano.specs --specs=nosys.specs -Xlinker --gc-sections -mfloat-abi=hard -g -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map
 
 # default action: build all
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
@@ -298,6 +310,15 @@ $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 #---------------------------- Jlink ---------------------------------#
 #install:
 #	JLinkExe -device STM32F103C8 -if swd -speed 4000
+	#loadbin build/$(TARGET).bin 0x8000000
+
+#######################################
+# clean up
+#######################################
+clean:
+	rmdir /s $(BUILD_DIR)
+
+# *** EOF ***
 	#loadbin build/$(TARGET).bin 0x8000000
 
 #######################################
