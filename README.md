@@ -57,6 +57,18 @@ Here are some ideas to get you started:
 
 
 
+
+static PhyIdentificator const kPhyId =
+{
+.id_3_18 = 0x0181,
+.id_19_24 = 0x2e,
+.model_number = 0x0a,
+};
+
+
+
+
+
 void(*app)(void);
 SCB->VTOR=start_address;
 __set_MSP(*(__IO uint32_t*)start_address);
@@ -65,6 +77,8 @@ app();
 while(1) {}
 
 nvic_vector_table_set(NVIC_VECTTAB_FLASH, 0x0800C000);
+
+
 
 
 
