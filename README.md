@@ -57,6 +57,9 @@ Here are some ideas to get you started:
 
 
 
+https://microtechnics.ru/modbus-rtu-slave-primer-realizaczii-na-mikrokontrollere-stm32/
+
+
 
 static PhyIdentificator const kPhyId =
 {
