@@ -57,7 +57,7 @@ Here are some ideas to get you started:
 
 
 
-https://microtechnics.ru/modbus-rtu-slave-primer-realizaczii-na-mikrokontrollere-stm32/
+https://www.feaser.com/en/blog/2023/04/stm32-modbus-rtu-server-tutorial/
 
 
 
