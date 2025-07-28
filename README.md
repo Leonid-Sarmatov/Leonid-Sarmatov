@@ -32,9 +32,6 @@
   <img src="https://github.com/devicons/devicon/blob/master/icons/jetbrains/jetbrains-original.svg" title="jetbrains"  alt="jetbrains" width="60" height="60"/>&nbsp;
 </div>
 
-## My contacts:
-- Email: ```chemestru@gmail.com```
-
 ## Achievements:
 - In May 2024, I completed a course on Golang development from Yandex. [See...](https://github.com/Leonid-Sarmatov/my-images/blob/master/729544474.pdf)
 - [Codewars profile](https://www.codewars.com/users/docent_204)
