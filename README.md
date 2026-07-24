@@ -2,7 +2,11 @@
 ![Kyu](https://www.codewars.com/users/docent_204/badges/large?logo=false)
 
 ## Statistics:
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Leonid-Sarmatov&layout=donut&langs_count=8)](https://github.com/anuraghazra/github-readme-stats)
+<div align="center">
+  <a href="https://github.com/Leonid-Sarmatov">
+    <img src="https://github-stats-2b2r.vercel.app/api/top-langs/?username=Leonid-Sarmatov&langs_count=8&layout=donut&hide_border=false&theme=dark&hide=css,html,scss,c" />
+  </a>
+</div>
 
 ## Programming Languages:
 <div>
