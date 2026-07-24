@@ -2,7 +2,7 @@
 ![Kyu](https://www.codewars.com/users/docent_204/badges/large?logo=false)
 
 ## Statistics:
-<div align="center">
+<div align="left">
   <a href="https://github.com/Leonid-Sarmatov">
     <img src="https://github-stats-2b2r.vercel.app/api/top-langs/?username=Leonid-Sarmatov&langs_count=8&layout=donut&hide_border=false&theme=dark&hide=css,html,scss,c" />
   </a>
