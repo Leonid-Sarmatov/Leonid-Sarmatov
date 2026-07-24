@@ -7,37 +7,54 @@
 ## Programming Languages:
 <div>
   <a href="https://go.dev">
-    <img src="https://github.com/devicons/devicon/blob/master/icons/go/go-original-wordmark.svg" title="Go" width="60" height="60"/>&nbsp;
+    <img src="https://github.com/devicons/devicon/blob/master/icons/go/go-original-wordmark.svg" width="60" height="60"/>&nbsp;
   </a>
   <a href="https://www.haskell.org">
-    <img src="https://github.com/devicons/devicon/blob/master/icons/haskell/haskell-original.svg" title="Python" width="60" height="60"/>&nbsp;
+    <img src="https://github.com/devicons/devicon/blob/master/icons/haskell/haskell-original.svg" width="60" height="60"/>&nbsp;
   </a>
   <a href="https://www.open-std.org">
-    <img src="https://github.com/devicons/devicon/blob/master/icons/c/c-original.svg"title="C" width="60" height="60"/>&nbsp;
+    <img src="https://github.com/devicons/devicon/blob/master/icons/c/c-original.svg" width="60" height="60"/>&nbsp;
   </a>
   <a href="https://www.java.com">
-    <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original.svg" title="Java" width="60" height="60"/>&nbsp;
+    <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original.svg" width="60" height="60"/>&nbsp;
   </a>
 </div>
 
 ## Tools and Technologies:
 <div>
-  <img src="https://github.com/devicons/devicon/blob/master/icons/postgresql/postgresql-original-wordmark.svg" title="PostgreSQL"  alt="PostgreSQL" width="60" height="60"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/redis/redis-original.svg" title="Redis"  alt="Redis" width="60" height="60"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/apachekafka/apachekafka-original-wordmark.svg" title="Apachekafka"  alt="Apachekafka" width="70" height="60"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/rabbitmq/rabbitmq-original-wordmark.svg" title="RabbitMQ"  alt="RabbitMQ" width="80" height="60"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/grpc/grpc-original.svg" title="GRPC" **alt="GRPC" width="60" height="60"/>
-  <img src="https://github.com/devicons/devicon/blob/master/icons/git/git-original-wordmark.svg" title="Git" **alt="Git" width="60" height="60"/>
-  <img src="https://github.com/devicons/devicon/blob/master/icons/docker/docker-original-wordmark.svg" title="Docker" **alt="Docker" width="60" height="60"/>
-  <img src="https://github.com/devicons/devicon/blob/master/icons/ubuntu/ubuntu-original.svg" title="Ubuntu" **alt="Ubuntu" width="60" height="60"/>
-  <img src="https://github.com/devicons/devicon/blob/master/icons/archlinux/archlinux-original.svg" title="Arch" **alt="Arch" width="60" height="60"/>
-</div>
-
-## Desktop applications:
-<div>
-  <img src="https://github.com/devicons/devicon/blob/master/icons/vscode/vscode-original-wordmark.svg" title="VSCode"  alt="VSCode" width="60" height="60"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/androidstudio/androidstudio-original.svg" title="androidstudio"  alt="androidstudio" width="60" height="60"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/jetbrains/jetbrains-original.svg" title="jetbrains"  alt="jetbrains" width="60" height="60"/>&nbsp;
+  <a href="https://www.postgresql.org">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/postgresql/postgresql-original.svg" width="60" height="60"/>
+  </a>
+  <a href="https://https://www.rabbitmq.com">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/rabbitmq/rabbitmq-original.svg" width="80" height="60"/>
+  </a>
+  <a href="https://https://grpc.io">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/grpc/grpc-original.svg" width="60" height="60"/>
+  </a>
+  <a href="https://https://kafka.apache.org">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/apachekafka/apachekafka-original.svg" width="70" height="60"/>
+  </a>
+  <a href="https://https://redis.io">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/redis/redis-original.svg" width="60" height="60"/>
+  </a>
+  <a href="https://gin-gonic.com">
+    <img src="https://img.shields.io/badge/-0D1117?style=flat-square&logo=gin&logoColor=008ECF" width="80"/>
+  </a>
+  <a href="https://https://www.docker.com">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/docker/docker-original.svg" width="60" height="60"/>
+  </a>
+  <a href="https://kubernetes.io">
+    <img src="https://img.shields.io/badge/-0D1117?style=flat-square&logo=kubernetes&logoColor=326CE5" width="80"/>
+  </a>
+  <a href="https://git-scm.com">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/git/git-original.svg" width="60" height="60"/>
+  </a>
+  <a href="https://ubuntu.com">
+    <img src="https://img.shields.io/badge/-0D1117?style=flat-square&logo=ubuntu&logoColor=E95420" width="80"/>
+  </a>
+  <a href="https://archlinux.org">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/archlinux/archlinux-original.svg" width="60" height="60"/>
+  </a>
 </div>
 
 ## Achievements:
