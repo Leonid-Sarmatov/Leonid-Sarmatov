@@ -13,7 +13,7 @@
 </div> -->
 <div>
   <a href="https://go.dev">
-    <img alt="Golang" src="https://img.shields.io/badge/-Go-0D1117?style=flat-square&logo=go&logoColor=00ADD8" />
+    <img alt="Golang" src="https://img.shields.io/badge/-Go-0D1117?style=flat-square&logo=go&logoColor=00ADD8" width="60" height="60"/>
   </a>
 </div>
 
