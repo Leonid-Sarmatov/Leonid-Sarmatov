@@ -5,15 +5,18 @@
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Leonid-Sarmatov&layout=donut&langs_count=8)](https://github.com/anuraghazra/github-readme-stats)
 
 ## Programming Languages:
-<!-- <div>
-  <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/go/go-original-wordmark.svg" title="Go" alt="Go" width="60" height="60"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/c/c-original.svg"title="C" alt="C" width="60" height="60"/>&nbsp;
-  <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original-wordmark.svg" title="Java" alt="Java" width="60" height="60"/>&nbsp;
-  <img src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/python/python-original-wordmark.svg" title="Python" alt="Python" width="60" height="60"/>&nbsp;
-</div> -->
 <div>
   <a href="https://go.dev">
-    <img alt="Golang" src="https://img.shields.io/badge/-Go-0D1117?style=flat-square&logo=go&logoColor=00ADD8&logoWidth=60" width="60" height="60"/>
+    <img src="https://github.com/devicons/devicon/blob/master/icons/go/go-original-wordmark.svg" title="Go" width="60" height="60"/>&nbsp;
+  </a>
+  <a href="https://www.haskell.org">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/haskell/haskell-original.svg" title="Python" width="60" height="60"/>&nbsp;
+  </a>
+  <a href="https://www.open-std.org">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/c/c-original.svg"title="C" width="60" height="60"/>&nbsp;
+  </a>
+  <a href="https://www.java.com">
+    <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original.svg" title="Java" width="60" height="60"/>&nbsp;
   </a>
 </div>
 
