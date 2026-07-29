@@ -29,22 +29,22 @@
   <a href="https://www.postgresql.org">
     <img src="https://github.com/devicons/devicon/blob/master/icons/postgresql/postgresql-original.svg" width="60" height="60"/>
   </a>
-  <a href="https://https://www.rabbitmq.com">
+  <a href="https://www.rabbitmq.com">
     <img src="https://github.com/devicons/devicon/blob/master/icons/rabbitmq/rabbitmq-original.svg" width="80" height="60"/>
   </a>
-  <a href="https://https://grpc.io">
+  <a href="https://grpc.io">
     <img src="https://github.com/devicons/devicon/blob/master/icons/grpc/grpc-original.svg" width="60" height="60"/>
   </a>
-  <a href="https://https://kafka.apache.org">
+  <a href="https://kafka.apache.org">
     <img src="https://github.com/devicons/devicon/blob/master/icons/apachekafka/apachekafka-original.svg" width="70" height="60"/>
   </a>
-  <a href="https://https://redis.io">
+  <a href="https://redis.io">
     <img src="https://github.com/devicons/devicon/blob/master/icons/redis/redis-original.svg" width="60" height="60"/>
   </a>
   <a href="https://gin-gonic.com">
     <img src="https://img.shields.io/badge/-0D1117?style=flat-square&logo=gin&logoColor=008ECF" width="80"/>
   </a>
-  <a href="https://https://www.docker.com">
+  <a href="https://www.docker.com">
     <img src="https://github.com/devicons/devicon/blob/master/icons/docker/docker-original.svg" width="60" height="60"/>
   </a>
   <a href="https://kubernetes.io">
