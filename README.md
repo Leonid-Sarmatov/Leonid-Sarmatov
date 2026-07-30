@@ -1,5 +1,9 @@
 ## My codewars profile:
-![Kyu](https://www.codewars.com/users/docent_204/badges/large?logo=false)
+<div aligin=left>
+  <a href=https://www.codewars.com/users/docent_204>
+    <img src=https://www.codewars.com/users/docent_204/badges/large?logo=false />
+  </a>
+</div>
 
 ## Statistics:
 <div align="left">
