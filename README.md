@@ -8,7 +8,7 @@
 ## Statistics:
 <div align="left">
   <a href="https://github.com/Leonid-Sarmatov">
-    <img src="https://github-stats-2b2r.vercel.app/api/top-langs/?username=Leonid-Sarmatov&langs_count=8&layout=donut&hide_border=false&theme=dark&hide=css,html,scss,c" />
+    <img src="https://github-stats-2b2r.vercel.app/api/top-langs/?username=Leonid-Sarmatov&langs_count=8&layout=donut&hide_border=false&theme=dark&hide=html,c,c%2B%2B,assembly" />
   </a>
 </div>
 
