@@ -69,7 +69,9 @@
 - In May 2024, I completed a course on Golang development from Yandex. [See...](https://github.com/Leonid-Sarmatov/my-images/blob/master/729544474.pdf)
 - [Codewars profile](https://www.codewars.com/users/docent_204)
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=Leonid-Sarmatov&label=Profile%20views&color=0e75b6&style=flat" alt="Leonid-Sarmatov" /> </p>
-
 ## Contact: 
 - [leonid.work.map@ya.ru](mailto:leonid.work.map@ya.ru)
+
+<p align="left"> 
+  <img src="https://komarev.com/ghpvc/?username=Leonid-Sarmatov&label=Profile%20views&color=0e75b6&style=flat" alt="Leonid-Sarmatov" /> 
+</p>
