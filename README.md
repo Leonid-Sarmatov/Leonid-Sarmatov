@@ -88,20 +88,27 @@
 
 ## Infra
 
+![RabbitMQ](https://img.shields.io/badge/-RabbitMQ-FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white)
+![Kafka](https://img.shields.io/badge/-Kafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white)
 ![Docker](https://img.shields.io/badge/-Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Docker Compose](https://img.shields.io/badge/-Docker_Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Kubernetes](https://img.shields.io/badge/-Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
-![RabbitMQ](https://img.shields.io/badge/-RabbitMQ-FF6600?style=for-the-badge&logo=rabbitmq&logoColor=white)
-![Kafka](https://img.shields.io/badge/-Kafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white)
 ![Grafana](https://img.shields.io/badge/-Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/-GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 ![GitLab CI](https://img.shields.io/badge/-GitLab_CI-FC6D26?style=for-the-badge&logo=gitlab&logoColor=white)
+
+## Teamwork
+
+![Confluence](https://img.shields.io/badge/-Confluence-172B4D?style=for-the-badge&logo=confluence&logoColor=white)
+![Redmine](https://img.shields.io/badge/-Redmine-B32024?style=for-the-badge&logo=redmine&logoColor=white)
+![Miro](https://img.shields.io/badge/-Miro-050038?style=for-the-badge&logo=miro&logoColor=white)
 
 
 ## Others
 
 ![Arch Linux](https://img.shields.io/badge/-Arch_Linux-1793D1?style=for-the-badge&logo=archlinux&logoColor=white)
 ![Ubuntu](https://img.shields.io/badge/-Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+![Bash](https://img.shields.io/badge/-Bash-E95420?style=for-the-badge&logo=gnubash&logoColor=white)
 ![Godot Engine](https://img.shields.io/badge/-Godot_Engine-478CBF?style=for-the-badge&logo=godotengine&logoColor=white)
 
 ## Achievements:
