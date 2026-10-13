@@ -11,7 +11,7 @@
   </a>
 </div>
 
-## Programming Languages:
+## Programming Languages
 <!-- <div>
   <a href="https://go.dev">
     <img src="https://github.com/devicons/devicon/blob/master/icons/go/go-original-wordmark.svg" width="60" height="60"/>&nbsp;
